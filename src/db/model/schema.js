@@ -1,7 +1,7 @@
 const Joi = require('joi')
 
 const userSchema = Joi.object({
-    name: Joi.string().min(3).max(30),
+    name: Joi.string().min(3).max(30).required(),
     email: Joi.string().min(5).max(40).required(),
     password: Joi.string().min(5).max(16).required(),
     token: Joi.string()
@@ -10,7 +10,7 @@ const userSchema = Joi.object({
 const postSchema = Joi.object({
     name: Joi.string().min(3).max(30).required(),
     model: Joi.string().min(3).max(30).required(),
-    price: Joi.number().required()
+    price: Joi.number().required().required()
 })
 
 module.exports = { userSchema, postSchema }
