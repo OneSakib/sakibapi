@@ -4,7 +4,7 @@ const helmet = require('helmet');
 const bodyParser = require('body-parser');
 const path = require('path');
 const monk = require('monk');
-const { notFound, errorHandler } = require('./middlewares');
+const { notFound, errorHandler } = require('./middleware');
 const app = express()
 
 require('dotenv').config();
@@ -15,7 +15,7 @@ app.use(helmet());
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 
-const post = require('./routes/post');
+const employee = require('./routes/employee');
 const user = require('./routes/user');
 
 // Specify the render engine by adding the following code in index.js file
@@ -26,11 +26,10 @@ app.use(express.static(path.join(__dirname, "assets")))
 
 // Home page
 app.get('/', (req, res, next) => {
-    console.log(">>>>>>>>", path.join(__dirname, "src", "assets"))
     res.render('index')
 })
 
-app.use('/api/post', post);
+app.use('/api/employee', employee);
 app.use('/api/auth', user);
 
 // middleware

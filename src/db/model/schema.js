@@ -7,10 +7,12 @@ const userSchema = Joi.object({
     token: Joi.string()
 })
 
-const postSchema = Joi.object({
-    name: Joi.string().min(3).max(30).required(),
-    model: Joi.string().min(3).max(30).required(),
-    price: Joi.number().required().required()
+const employeeSchema = Joi.object({
+    firstName: Joi.string().min(3).max(30).required(),
+    lastName: Joi.string().min(3).max(30),
+    age: Joi.number().required(),
+    address: Joi.string().min(6).required(),
+    user_email: Joi.string()
 })
 
-module.exports = { userSchema, postSchema }
+module.exports = { userSchema, employeeSchema }
