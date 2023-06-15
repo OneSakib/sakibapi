@@ -3,7 +3,7 @@ const morgan = require('morgan');
 const helmet = require('helmet');
 const bodyParser = require('body-parser');
 const path = require('path');
-const monk = require('monk');
+const cors = require('cors')
 const { notFound, errorHandler } = require('./middleware');
 const app = express()
 
@@ -14,6 +14,7 @@ require('dotenv').config();
 app.use(helmet());
 app.use(morgan('dev'));
 app.use(bodyParser.json());
+app.use(cors());
 
 const employee = require('./routes/employee');
 const user = require('./routes/user');
