@@ -14,10 +14,12 @@
 <body>
   <!-- Header -->
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg bg-body-tertiary bg-success text-white border-bottom border-bottom-dark" data-bs-theme="dark">
+  <nav class="navbar navbar-expand-lg bg-body-tertiary bg-success text-white border-bottom border-bottom-dark"
+    data-bs-theme="dark">
     <div class="container-fluid">
       <a class="navbar-brand text-white" href="/">SAKIBAPI</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -37,7 +39,8 @@
     <div class="accordion mt-2" id="user-api">
       <div class="accordion-item">
         <h1 class="accordion-header">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#user-collapseOne" aria-expanded="true" aria-controls="user-collapseOne">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#user-collapseOne" aria-expanded="true" aria-controls="user-collapseOne">
             New User Register/SignUp
           </button>
         </h1>
@@ -45,7 +48,9 @@
           <div class="accordion-body">
             <p>Request Method-> <strong>POST</strong></p>
             <hr>
-            <p>Request Route-> <strong><a href="/api/auth/register">/api/auth/register</a></strong></p>
+            <p>Request URL-> <strong><a href="<%=base_url%>/api/auth/register">
+                  <%=base_url%>/api/auth/register
+                </a></strong></p>
             <hr>
             <p>Request Body-> <strong>
                 <pre>
@@ -68,12 +73,25 @@
                         </pre>
               </strong>
             </p>
+            <hr>
+            <p>Response-> <strong>
+                <pre>
+  {
+    "name": "Your NAME",
+    "email": "Your email",
+    "password": "Your Password",
+    "token": "YOUR_TOKEN"
+  }
+                        </pre>
+              </strong>
+            </p>
           </div>
         </div>
       </div>
       <div class="accordion-item">
         <h2 class="accordion-header">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#user-collapseTwo" aria-expanded="false" aria-controls="user-collapseTwo">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#user-collapseTwo" aria-expanded="false" aria-controls="user-collapseTwo">
             User login/SignIn
           </button>
         </h2>
@@ -81,7 +99,9 @@
           <div class="accordion-body">
             <p>Request Method-> <strong>POST</strong></p>
             <hr>
-            <p>Request Route-> <strong><a href="/api/auth/login">/api/auth/login</a></strong></p>
+            <p>Request URL-> <strong><a href="<%=base_url%>/api/auth/login">
+                  <%=base_url%>/api/auth/login
+                </a></strong></p>
             <hr>
             <p>Request Body-> <strong>
                 <pre>
@@ -102,6 +122,18 @@
                         </pre>
               </strong>
             </p>
+            <hr>
+            <p>Response-> <strong>
+                <pre>
+  {
+    "name": "Your NAME",
+    "email": "Your email",
+    "password": "Your Password",
+    "token": "YOUR_TOKEN"
+  }
+                        </pre>
+              </strong>
+            </p>
           </div>
         </div>
       </div>
@@ -110,7 +142,8 @@
     <div class="accordion mt-2" id="crud-api">
       <div class="accordion-item">
         <h1 class="accordion-header">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#crud-collapseOne" aria-expanded="true" aria-controls="crud-collapseOne">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#crud-collapseOne" aria-expanded="true" aria-controls="crud-collapseOne">
             Employee List (GET)
           </button>
         </h1>
@@ -118,7 +151,9 @@
           <div class="accordion-body">
             <p>Request Method-> <strong>GET</strong></p>
             <hr>
-            <p>Request Route-> <strong><a href="/api/employee">/api/employee</a></strong></p>
+            <p>Request URL-> <strong><a href="<%=base_url%>/api/employee">
+                  <%=base_url%>/api/employee
+                </a></strong></p>
             <hr>
             <p>Request Header->
               Key: <strong>
@@ -127,12 +162,38 @@
               Value: <strong?>
                 Token(Token, Which generate when user login.)
                 </strong>
+            </p>
+            <hr>
+            <p>Response->
+            <pre>
+[
+  {
+    "_id": "648bcb0b004f8303442ca860",
+    "firstName": "ABC",
+    "lastName": "XYZ",
+    "age": 21,
+    "address": "XFSLLD",
+    "user_email": "abc@gmail.com"
+  },
+  {
+    "_id": "648bcb17004f8303442ca861",
+    "firstName": "ABCC",
+    "lastName": "XYZ",
+    "age": 21,
+    "address": "XFSLLD",
+    "user_email": "abc@gmail.com"
+  }
+]
+              </pre>
+            </p>
+
           </div>
         </div>
       </div>
       <div class="accordion-item">
         <h1 class="accordion-header">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#crud-collapseTwo" aria-expanded="true" aria-controls="crud-collapseTwo">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#crud-collapseTwo" aria-expanded="true" aria-controls="crud-collapseTwo">
             Specific Employee (GET)
           </button>
         </h1>
@@ -140,7 +201,9 @@
           <div class="accordion-body">
             <p>Request Method-> <strong>GET</strong></p>
             <hr>
-            <p>Request Route-> <strong><a href="/api/employee/:employee_id">/api/employee/:employee_id</a></strong></p>
+            <p>Request URL-> <strong><a href="<%=base_url%>/api/employee/:employee_id">
+                  <%=base_url%>/api/employee/:employee_id
+                </a></strong></p>
             <hr>
             <p>Request Header->
               Key: <strong>
@@ -149,12 +212,28 @@
               Value: <strong?>
                 Token(Token, Which generate when user login.)
                 </strong>
+            </p>
+            <hr>
+            <p>Response->
+            <pre>
+  {
+    "_id": "648bcb17004f8303442ca861",
+    "firstName": "ABCC",
+    "lastName": "XYZ",
+    "age": 21,
+    "address": "XFSLLD",
+    "user_email": "abc@gmail.com"
+  }
+              </pre>
+            </p>
+
           </div>
         </div>
       </div>
       <div class="accordion-item">
         <h1 class="accordion-header">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#crud-collapseThree" aria-expanded="true" aria-controls="crud-collapseThree">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#crud-collapseThree" aria-expanded="true" aria-controls="crud-collapseThree">
             Add New Employee (CREATE)
           </button>
         </h1>
@@ -162,7 +241,9 @@
           <div class="accordion-body">
             <p>Request Method-> <strong>POST</strong></p>
             <hr>
-            <p>Request Route-> <strong><a href="/api/employee">/api/employee</a></strong></p>
+            <p>Request URL-> <strong><a href="<%=base_url%>/api/employee">
+                  <%=base_url%>/api/employee
+                </a></strong></p>
             <hr>
             <p>Request Header->
               Key: <strong>
@@ -183,6 +264,7 @@
                   </pre>
               </strong>
             </p>
+            <hr>
             <p>Example Body-> <strong>
                 <pre>
   {
@@ -194,12 +276,27 @@
                         </pre>
               </strong>
             </p>
+            <hr>
+            <p>Response-> <strong>
+                <pre>
+  {
+    "firstName": "ABCDEF",
+    "lastName": "XYZ",
+    "age": 20,
+    "address": "HE 1218, XYZ City, India 124367",
+    "user_email": "abc@gmail.com",
+    "_id": "648bcc4b004f8303442ca862"
+  }
+                        </pre>
+              </strong>
+            </p>
           </div>
         </div>
       </div>
       <div class="accordion-item">
         <h1 class="accordion-header">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#crud-collapseFour" aria-expanded="true" aria-controls="crud-collapseFour">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#crud-collapseFour" aria-expanded="true" aria-controls="crud-collapseFour">
             Update/Change Employee Info (UPDATE)
           </button>
         </h1>
@@ -207,7 +304,9 @@
           <div class="accordion-body">
             <p>Request Method-> <strong>PUT</strong></p>
             <hr>
-            <p>Request Route-> <strong><a href="/api/employee/:employee_id">/api/:employee_id</a></strong></p>
+            <p>Request URL-> <strong><a href="<%=base_url%>/api/employee/:employee_id">
+                  <%=base_url%>/api/:employee_id
+                </a></strong></p>
             <hr>
             <p>Request Header->
               Key: <strong>
@@ -239,12 +338,27 @@
                         </pre>
               </strong>
             </p>
+            <hr>
+            <p>Response-> <strong>
+                <pre>
+  {
+    "firstName": "ABCDEF",
+    "lastName": "XYZ",
+    "age": 20,
+    "address": "HE 1218, XYZ City, India 124367",
+    "user_email": "abc@gmail.com",
+    "_id": "648bcc4b004f8303442ca862"
+  }
+                        </pre>
+              </strong>
+            </p>
           </div>
         </div>
       </div>
       <div class="accordion-item">
         <h1 class="accordion-header">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#crud-collapseFive" aria-expanded="true" aria-controls="crud-collapseFive">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#crud-collapseFive" aria-expanded="true" aria-controls="crud-collapseFive">
             Remove/Delete Employee Info (DELETE)
           </button>
         </h1>
@@ -252,7 +366,9 @@
           <div class="accordion-body">
             <p>Request Method-> <strong>DELETE</strong></p>
             <hr>
-            <p>Request Route-> <strong><a href="/api/employee/:employee_id">/api/employee/:employee_id</a></strong></p>
+            <p>Request URL-> <strong><a href="<%=base_url%>/api/employee/:employee_id">
+                  <%=base_url%>/api/employee/:employee_id
+                </a></strong></p>
             <hr>
             <p>Request Header->
               Key: <strong>
@@ -262,6 +378,14 @@
                 Token(Token, Which generate when user login.)
               </strong>
               <hr>
+            </p>
+            <p>Response->
+            <pre>
+  {
+    "message": "Successfully Delete employee"
+  }
+              </pre>
+            </p>
           </div>
         </div>
       </div>

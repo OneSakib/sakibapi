@@ -27,7 +27,10 @@ app.use(express.static(path.join(__dirname, "assets")))
 
 // Home page
 app.get('/', (req, res, next) => {
-    res.render('index')
+    const context = {
+        "base_url": "https://" + req.headers.host
+    }
+    res.render('index', context)
 })
 
 app.use('/api/employee', employee);

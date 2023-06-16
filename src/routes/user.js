@@ -5,12 +5,13 @@ const db_user = db.get('user');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken')
 const router = express.Router();
-
-
+const helper = require('../helper');
+const e = require('express');
+const { verifyToken } = require('../middleware/auth')
 
 // API Endpoints
 // get all user
-router.get('/', async (req, res, next) => {
+router.get('/users', verifyToken, async (req, res, next) => {
     try {
         const allUser = await db_user.find({});
         res.json(allUser)
@@ -23,6 +24,20 @@ router.get('/', async (req, res, next) => {
 router.post('/login/', async (req, res, next) => {
     try {
         const { email, password } = req.body;
+        // Validate
+        const result = userSchema.validate({ email, password })
+        if (result?.error) {
+            let err = []
+            result.error.details.map((ele) => {
+                let key = ele.path[0]
+                let value = ele.message
+                let e = {}
+                e[key] = value
+                err.push(e)
+            })
+            res.json(err)
+            return
+        }
         const user = await db_user.findOne({
             email: email
         })
@@ -55,7 +70,19 @@ router.post('/login/', async (req, res, next) => {
 router.post('/register', async (req, res, next) => {
     try {
         const { name, email, password } = req.body;
-        const result = await userSchema.validateAsync({ name, email, password })
+        const result = userSchema.validate({ name, email, password })
+        if (result?.error) {
+            let err = []
+            result.error.details.map((ele) => {
+                let key = ele.path[0]
+                let value = ele.message
+                let e = {}
+                e[key] = value
+                err.push(e)
+            })
+            res.json(err)
+            return
+        }
         const user = await db_user.findOne({
             email
         })
@@ -98,7 +125,11 @@ router.put('/user/:id', async (req, res, next) => {
     try {
         const { id } = req.params;
         const { name, email, password } = req.body;
-        const result = await userSchema.validateAsync({ name, email, password });
+        // const result = await userSchema.validateAsync({ name, email, password });
+        const validate = helper.validate({ name, email, password })
+        if (validate.length > 0) {
+            res.send(validate)
+        }
         const user = await db_user.findOne({
             _id: id
         })

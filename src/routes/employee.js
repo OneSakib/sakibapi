@@ -44,10 +44,24 @@ router.post('/', verifyToken, async (req, res, next) => {
     try {
         const { firstName, lastName, age, address } = req.body;
         const user_email = req.user.email;
-        const result = await employeeSchema.validateAsync({ firstName, lastName, age, address })
+        // Validate
+        const result = employeeSchema.validate({ firstName, lastName, age, address })
+        if (result?.error) {
+            let err = []
+            result.error.details.map((ele) => {
+                let key = ele.path[0]
+                let value = ele.message
+                let e = {}
+                e[key] = value
+                err.push(e)
+            })
+            res.json(err)
+            return
+        }
         const employee = await db_employee.findOne({
-            "firstName": firstName,
-            "lastName": lastName
+            firstName,
+            lastName,
+            user_email
         })
         // if employee already exist
         if (employee) {
@@ -72,7 +86,20 @@ router.put('/:id', verifyToken, async (req, res, next) => {
         const { id } = req.params;
         const { firstName, lastName, age, address } = req.body;
         const user_email = req.user.email;
-        const result = await employeeSchema.validateAsync({ firstName, lastName, age, address });
+        // Validate
+        const result = employeeSchema.validate({ firstName, lastName, age, address })
+        if (result?.error) {
+            let err = []
+            result.error.details.map((ele) => {
+                let key = ele.path[0]
+                let value = ele.message
+                let e = {}
+                e[key] = value
+                err.push(e)
+            })
+            res.json(err)
+            return
+        }
         const employee = await db_employee.findOne({
             _id: id, user_email
         })
