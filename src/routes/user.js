@@ -65,7 +65,7 @@ router.post('/login/', async (req, res, next) => {
             res.json(response);
         }
         else {
-            res.status = 409;
+            res.status(409);//conflict
             res.json({ "message": "Authorization Failed" });
         }
 
