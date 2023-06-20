@@ -47,6 +47,7 @@ router.post('/login/', async (req, res, next) => {
             return next(error)
         }
         if (user && (await bcrypt.compare(password, user.password))) {
+            console.log("CALLED INNER")
             // Create Token
             const token = jwt.sign({
                 user_id: user.id, "email": email.toLowerCase()
@@ -56,11 +57,18 @@ router.post('/login/', async (req, res, next) => {
                     expiresIn: '2h'
                 }
             )
+            console.log("CALLLED TOKEN", token)
             // Save user token
             user.token = token;
+            const response = { 'email': email, 'name': user.name, "token": user.token }
+            console.log("TOKEN", response)
+            res.json(response);
         }
-        const response = { 'email': email, 'name': user.name, "token": user.token }
-        res.json(response);
+        else {
+            res.status = 409;
+            res.json({ "message": "Authorization Failed" });
+        }
+
     }
     catch (error) {
         next(error)
