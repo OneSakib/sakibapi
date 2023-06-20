@@ -55,6 +55,7 @@ router.post('/', verifyToken, async (req, res, next) => {
                 e[key] = value
                 err.push(e)
             })
+            res.status(409);//conflict
             res.json(err)
             return
         }
@@ -97,6 +98,7 @@ router.put('/:id', verifyToken, async (req, res, next) => {
                 e[key] = value
                 err.push(e)
             })
+            res.status(409);//conflict
             res.json(err)
             return
         }
