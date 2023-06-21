@@ -113,7 +113,7 @@ router.put('/:id', verifyToken, async (req, res, next) => {
             _id: id, user_email
         },
             {
-                $set: result
+                $set: { firstName, lastName, age, address }
             },
             {
                 upsert: true
