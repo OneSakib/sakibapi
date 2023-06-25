@@ -14,9 +14,10 @@ router.get('/', verifyToken, async (req, res, next) => {
     try {
         const user_email = req.user.email;
         const allEmployee = await db_employee.find({ user_email });
-        res.json(allEmployee)
+        return res.json(allEmployee)
     } catch (error) {
-        next(error)
+        res.status(409);//conflict
+        return res.json(error);
     }
 })
 
@@ -29,13 +30,14 @@ router.get('/:id', verifyToken, async (req, res, next) => {
             _id: id, user_email
         })
         if (!employee) {
-            const error = new Error('Employee does not exist');
-            return next(error)
+            res.status(409);//conflict
+            return res.json({ "message": "Employee does not exist" });
         }
-        res.json(employee);
+        return res.json(employee);
     }
     catch (error) {
-        next(error)
+        res.status(409);//conflict
+        return res.json(error);
     }
 })
 
@@ -56,8 +58,7 @@ router.post('/', verifyToken, async (req, res, next) => {
                 err.push(e)
             })
             res.status(409);//conflict
-            res.json(err)
-            return
+            return res.json(err)
         }
         const employee = await db_employee.findOne({
             firstName,
@@ -67,17 +68,16 @@ router.post('/', verifyToken, async (req, res, next) => {
         // if employee already exist
         if (employee) {
             res.status(409);//conflict
-            const error = new Error('Employee already exist');
-            return next(error)
+            return res.json({ "message": "Employee does not exist" });
         }
         // /else
         const new_employee = await db_employee.insert({
             firstName, lastName, age, address, user_email
         })
-        console.log('Employee has been created');
-        res.status(201).json(new_employee);
+        return res.status(201).json(new_employee);
     } catch (error) {
-        next(error)
+        res.status(409);//conflict
+        return res.json(error);
     }
 })
 
@@ -99,15 +99,15 @@ router.put('/:id', verifyToken, async (req, res, next) => {
                 err.push(e)
             })
             res.status(409);//conflict
-            res.json(err)
-            return
+            return res.json(err)
         }
         const employee = await db_employee.findOne({
             _id: id, user_email
         })
         // if employee does not exist
         if (!employee) {
-            return next();
+            res.status(409);//conflict
+            return res.json({ "message": "Employee does not exist" });
         }
         const updateEmployee = await db_employee.update({
             _id: id, user_email
@@ -119,10 +119,11 @@ router.put('/:id', verifyToken, async (req, res, next) => {
                 upsert: true
             }
         )
-        res.json(updateEmployee)
+        return res.json(updateEmployee)
     }
-    catch (err) {
-        next(err)
+    catch (error) {
+        res.status(409);//conflict
+        return res.json(error);
     }
 })
 
@@ -141,12 +142,13 @@ router.delete('/:id', verifyToken, async (req, res, next) => {
         await db_employee.remove({
             _id: id, user_email
         })
-        res.json({
+        return res.json({
             message: 'Successfully Delete employee'
         })
     }
-    catch (err) {
-        next(err)
+    catch (error) {
+        res.status(409);//conflict
+        return res.json(error);
     }
 })
 
